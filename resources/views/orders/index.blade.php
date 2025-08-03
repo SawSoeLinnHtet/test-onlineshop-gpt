@@ -49,7 +49,7 @@
             @endforeach
           </tbody>
           <tfoot>
-            @if ($order->status !==  'cancelled')
+            @if ($order->status == 'pending')
               <tr>
                 <td colspan="3">
 

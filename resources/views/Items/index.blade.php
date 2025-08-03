@@ -17,13 +17,14 @@
               <p class="mb-4">Browse by Category</p>
               <div class="row row-cols-1 row-cols-md-3 row-cols-xl-4">
                 <div class="card card-body">
-                  <form action="{{ route('shop.home')}}" method="GET">
+                  <form action="{{ route('shop.home') }}" id="category_filter_form" method="GET">
                     @foreach($categories as $key => $category)
-                      <div class="form-group d-flex align-items-center mb-3">
-                        <input type="radio" name="category_id" id="category_{{$key}}" value="<input type="radio" name="" id=""><label class="ms-3" style="text-transform: capitalize" for="category_{{$key}}">{{ $category->name }}</label>
-                      </div>
-                    @endforeach
-                  </form>
+                        <div class="form-group d-flex align-items-center mb-3">
+                            <input type="radio" name="category_id" id="category_{{ $key }}" value="{{ $category->id }}"{{ request('category_id') == $category->id ? 'checked' : '' }}>
+                            <label class="ms-3" style="text-transform: capitalize" for="category_{{ $key }}" style="cursor: pointer;">{{ $category->name }}</label>
+                        </div>
+                    @endForeach
+                </form>
                 </div>
               </div>
             </div>
@@ -71,3 +72,20 @@
           </div>
         </section>
 @endsection
+
+@push('scripts')
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+      const categoryForm = document.getElementById('category_filter_form');
+
+      categoryForm.addEventListener('change', (e) => {
+          if (e.target.name === 'category_id') {
+              categoryForm.submit();
+          }
+      });
+  });
+</script>
+
+
+@endpush

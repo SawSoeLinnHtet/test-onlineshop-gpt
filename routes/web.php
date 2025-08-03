@@ -103,8 +103,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth','admin'])->group(func
              ->name('sellers.ban');
 
         // Products
-        Route::get('products', [AdminProductController::class,'index'])
-             ->name('products');
+        Route::get('products', [AdminProductController::class,'index'])->name('products');
 
         // Orders
         Route::get('orders', [AdminOrderController::class,'index'])->name('orders');
